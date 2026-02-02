@@ -65,7 +65,7 @@
 
   <script>
     const yesBtn = document.getElementById("yes");
-    const noBtn  = document.getElementById("no");
+    const noBtn = document.getElementById("no");
 
     function centerButtons() {
       const centerX = window.innerWidth / 2;
@@ -74,44 +74,45 @@
       yesBtn.style.left = centerX - yesBtn.offsetWidth - 10 + "px";
       yesBtn.style.top  = centerY + "px";
 
-      noBtn.style.left  = centerX + 10 + "px";
-      noBtn.style.top   = centerY + "px";
+      noBtn.style.left = centerX + 10 + "px";
+      noBtn.style.top  = centerY + "px";
     }
 
-    function moveNo() {
+    function moveYes() {
       const padding = 10;
-      const maxX = window.innerWidth - noBtn.offsetWidth - padding;
-      const maxY = window.innerHeight - noBtn.offsetHeight - padding;
+      const maxX = window.innerWidth - yesBtn.offsetWidth - padding;
+      const maxY = window.innerHeight - yesBtn.offsetHeight - padding;
 
       const x = Math.random() * maxX;
       const y = Math.random() * maxY;
 
-      noBtn.style.left = x + "px";
-      noBtn.style.top  = y + "px";
+      yesBtn.style.left = x + "px";
+      yesBtn.style.top  = y + "px";
     }
 
-    /* NO escapes immediately (desktop + mobile) */
-    noBtn.addEventListener("mouseenter", moveNo);
-    noBtn.addEventListener("mousedown", moveNo);
-    noBtn.addEventListener("touchstart", moveNo, { passive: true });
+    /* Immediate escape (mobile + desktop) */
+    yesBtn.addEventListener("mouseenter", moveYes);
+    yesBtn.addEventListener("mousedown", moveYes);
+    yesBtn.addEventListener("touchstart", moveYes, { passive: true });
 
-    /* YES click */
-    yesBtn.addEventListener("click", () => {
+    /* NO click */
+    noBtn.addEventListener("click", () => {
       document.body.innerHTML = `
         <div style="
           display:flex;
           justify-content:center;
           align-items:center;
           height:100vh;
-          font-size:clamp(22px,6vw,34px);
+          font-size:clamp(22px,6vw,32px);
           background:#ffe6ee;
           text-align:center;
           padding:20px;">
-          Yay! 💕 You are now mine  💖
+          We'll try again next year 💔
         </div>
       `;
     });
 
+    /* Re-center on load & resize */
     window.addEventListener("load", centerButtons);
     window.addEventListener("resize", centerButtons);
     window.addEventListener("orientationchange", centerButtons);
